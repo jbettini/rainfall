@@ -1,0 +1,4 @@
+Apres analyse du code en assembleur avec gdb (en faisant "disassemble main" on peut constater que le programme attend une chaine de caractere en particulier. 
+on devine qu'il s'agit de 423 car il compare l argument donne avec ce chiffre dans le code.
+
+./level 423 -> nous log avec level1. il n y a plus qu ' a aller dans le dossier /home/user/level1 ou se trouve le fichier .pass.
