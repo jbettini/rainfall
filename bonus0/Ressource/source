@@ -1,0 +1,55 @@
+
+
+
+
+char *p(char *dest, char *s) 
+{
+  char buf[4104]; // [esp+10h] [ebp-1008h] BYREF
+
+  puts(s);    // affiche un tiret 
+
+  read(0, buf, 4096);   // lecture de 4096 caractere
+
+  *strchr(buf, 10) = 0;    // remplacement du \n par un null byte
+
+  return strncpy(dest, buf, 20);  // copie des 20 premiere caractere lu
+}
+
+
+
+
+
+
+char *pp(char *dest) {
+
+  char src[20];
+
+  char v3[28];
+
+  p(src, " - ");              //  premier   string taille 20
+
+  p(v3, " - ");               //  deuxieme  string taille 20
+
+  strcpy(dest, src);          // copie de la premiere string dans dest
+
+  dest[strlen(dest)] = ' ';   // mise en place d'un espace dans dest
+
+  return strcat(dest, v3);    // collage de la deuxieme string dans dest
+
+}
+
+
+
+
+
+
+int main(int argc, const char **argv, const char **envp) {
+
+  char s[42];
+
+  pp(s);
+
+  puts(s);
+
+  return 0;
+}
