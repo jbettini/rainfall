@@ -36,7 +36,7 @@ Analyse des registre :
 
 Apres les test on peu voir que seulement av[1] overflow sur des donnée critique.
 On va analiser les registres lors de l'overflow :
-
+```
 level7@RainFall:~$ gdb ./level7
 (gdb) run $(python -c 'print("A" * 200)') $(python -c 'print("BBB")')
 Starting program: /home/user/level7/level7 $(python -c 'print("A" * 200)') $(python -c 'print("BBB")')
@@ -72,7 +72,7 @@ Vue sur l'appel du deuxieme strcpy
    0x080485cc <+171>:	mov    %edx,0x4(%esp)
    0x080485d0 <+175>:	mov    %eax,(%esp)
 (...)
-
+```
 eax contient notre av[2] et notre overflow a ecrasé eax, et que l'on ecrase pas eip.
 On peu en conclure ceci :
 
