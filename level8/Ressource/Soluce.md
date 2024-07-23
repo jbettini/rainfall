@@ -1,35 +1,6 @@
-PseudoCode :
+# Solution
 
-** Very lightweight cleaned code, can contain mistakes **
-** it is just for the logic
-
-int *globalAuth;
-int *globalService;
-
-
-void main(void) {
-    int ret;
-    char buf[5];
-    char s1[128];
-    printf("%p %p", globalAuth, globalService);
-    ret = fgets(buf,0x80,1);
-    if (!ret)
-        return ;
-    if (!strcmp(buf, "auth "))
-        globalAuth = malloc(4);
-    else if (!strcmp(buf, "reset"))
-        free(globalAuth);
-    else if (!strcmp(buf, "service"))
-        globalService = strdup(s1);
-    else if (!strcmp(buf, "login")) {
-        if (globalAuth[8] == 0)
-            printf("PASSWORD:\n");
-        else
-            system("/bin/sh");
-    }
-}
-
-Solution :
+## Explication du code
 
 On peu voir que si la 8eme case memoire apres le debut de auth serait initialiser un shell s'ouvrirait en donnant comment entrée "login"
 a notre programe.

@@ -1,0 +1,26 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+void p(void) {
+    char str[76];
+    uint32_t i;
+    
+    fflush(stdout);
+    gets(str);
+    if ((i & 0xb0000000) == 0xb0000000) {
+        printf("(%p)\n", (void*)i);
+        /* WARNING: Subroutine does not return */
+        _exit(1);
+    }
+    puts(str);
+    strdup(str);
+    return;
+}
+
+void main(void) {
+    p();
+    return;
+}

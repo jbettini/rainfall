@@ -1,7 +1,0 @@
-0 - le home de level1 contient un binaire 
-1 - recuperer le binaire sur la machine hote avec : "scp -P 4242 level1@10.211.55.3:/home/user/level1/level1 ."
-2 - l'ouvrir dans ghidra importer le binaire analyser le en fesant un doucle click dessus et aller dans l'onglet window et ouvrir le mode decompiler
-3 - le binaire contient une fonction run qui lance un shell mais qui n'est pas apeler et un main qui lis sur l'entrée standard avec gets() et stock le tout dans une string de 76 case memoire donc si l'on fait python -c "print('A' * 76)" | ./level1 cela overflow
-4 - on peut exploiter cela en recuperer l'adresse de run dans ghidra a la section PUSH de la fonction run dans la listing window : 08048444 , on l'as converti en litle endian : "\x44\x84\x04\x08"
-5 - on lance cette commande : [  (python -c 'print("A"*76 + "\x44\x84\x04\x08")'; cat) | ./level1  ] qui va avoir pour effet de print 76 x A et ajouter l'adresse de run la ou la memoire est ecrasé lors de l'overflow afin quelle sois executer, on ajoute un cat afin que la pipe de se ferme pas 
-6 - plus que a recuperer le pass dans /home/user/level2/.pass
