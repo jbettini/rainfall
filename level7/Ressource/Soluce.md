@@ -91,7 +91,7 @@ Comme puts est une fonction de la libc il faudra recuper don adresse dans la GOT
 
 -----------------
 D'abord recuperons le critical offset lorsque l'on ecrase edx :
-
+```
 (gdb) run Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A BBBB
 Starting program: /home/user/level7/level7 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2A BBBB
 
@@ -119,7 +119,7 @@ ds             0x7b	123
 es             0x7b	123
 fs             0x0	0
 gs             0x33	51
-
+```
 
 0x37614136 -> ASCII + REVERSE -> 6Aa7
 
