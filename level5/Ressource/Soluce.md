@@ -8,14 +8,14 @@
 
 Ici le niveau est le meme que les precedent sauf que au lieu d'utiliser un printf format exploit, pour ecrire dans une variable ou autre on va directment overwrite l'adresse d'une fonction de la libc , "exit" son adresse se situe dans la global offset table (GOT).
 
-------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 Adresse de o :
-
+```
 level5@RainFall:~$ gdb ./level5 
 (gdb) p &o
 $1 = (<text variable, no debug info> *) 0x80484a4 <o>
-
-------------------------------------------------------------------------------------------------
+```
+----------------------------------------------------------------------------------------
 
 Adresse de exit dans la Got (global offset table) :
 
